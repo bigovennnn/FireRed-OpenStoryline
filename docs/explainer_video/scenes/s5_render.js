@@ -143,8 +143,8 @@
           ctx.restore();
           roundRect(ctx, fx, fy, L, Ht, 16); ctx.strokeStyle = C.ink; ctx.lineWidth = 4; ctx.stroke();
           ctx.fillStyle = C.fire; ctx.fillRect(fx + w - 3, fy, 6, Ht);
-          text(ctx, '转场', 620, 720, { size: 44, weight: 'bold' });
-          text(ctx, '淡入 · 推拉 · 擦除', 690, 790, { size: 30, color: C.inkSoft, align: 'right' });
+          text(ctx, '转场', 680, 720, { size: 44, weight: 'bold' });
+          text(ctx, '淡入 · 推拉 · 擦除', 680, 790, { size: 30, color: C.inkSoft });
           ctx.restore();
           // 花字 preview
           ctx.save(); ctx.translate(1420, 730); ctx.scale(s2, s2); ctx.translate(-1420, -730);
