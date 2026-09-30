@@ -5,10 +5,10 @@
     ['load_media', C.sky], ['split_shots', C.mint], ['understand_clips', C.lavender],
     ['generate_script', C.pink], ['plan_timeline_pro', C.peach], ['render_video', C.butter],
   ];
-  const SH = { x: 790, y: 270, w: 480, h: 550 };
+  const SH = { x: 790, y: 250, w: 480, h: 600 };
   const CB = { x: 1450, y: 250, w: 380, h: 560 };
   const AG = { x: 110, y: 380, w: 440, h: 330 };
-  const chipY = i => SH.y + 135 + i * 80;
+  const chipY = i => SH.y + 165 + i * 75;
   const drawerY = i => CB.y + 120 + i * 105;
 
   function pulse(ctx, x1, y1, x2, y2, t, color, n = 3, speed = 0.9) {
@@ -73,11 +73,11 @@
         icon(ctx, 'brain', 0, 2, 70, C.ink);
         ctx.restore();
         // Claude cameo thinking, peeking from card corner
-        drawClaude(ctx, AG.x + 40, AG.y + AG.h + 60 + (1 - ap) * 100, 130, { t, mood: t > 4.5 && t < 7.4 ? 'think' : 'happy', look: { x: 0.5, y: -0.4 }, blinkOffset: 1 });
+        drawClaude(ctx, 1380, 130 + (1 - ap) * -200, 150, { t, mood: t > 4.5 && t < 7.4 ? 'think' : (t > 12 ? 'wink' : 'happy'), look: { x: -0.6, y: 0.3 }, blinkOffset: 1 });
         if (t > 4.4 && t < 7.6) {
           const q = Math.sin(t * 6) * 6;
-          text(ctx, '？', AG.x + 130, AG.y + AG.h + 10 + q, { size: 44, color: C.claude, weight: 'bold' });
-          if (t > 5.4) text(ctx, '！', AG.x + 80, AG.y + AG.h - 10 - q, { size: 40, color: C.fire, weight: 'bold', alpha: 0.9 });
+          text(ctx, '？', 1290, 60 + q, { size: 44, color: C.claude, weight: 'bold' });
+          if (t > 5.4) text(ctx, '！', 1480, 70 - q, { size: 40, color: C.fire, weight: 'bold', alpha: 0.9 });
         }
       }
 
@@ -106,7 +106,7 @@
         text(ctx, '一排剪辑工具', SH.w / 2, 100, { size: 30, color: C.inkSoft });
         // planks
         for (let i = 0; i < tools.length; i++) {
-          const py = chipY(i) - SH.y + 38;
+          const py = chipY(i) - SH.y + 34;
           ctx.fillStyle = '#E8D9BC'; ctx.strokeStyle = C.ink; ctx.lineWidth = 4;
           roundRect(ctx, 28, py, SH.w - 56, 14, 7); ctx.fill(); ctx.stroke();
         }
