@@ -1,0 +1,30 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>OpenStoryline Explainer</title>
+<style>html,body{margin:0;background:#222}canvas{display:block;width:100vw;max-width:1920px}</style>
+</head><body>
+<canvas id="c" width="1920" height="1080"></canvas>
+<script>
+// render.js injects window.__SCRIPT__; for manual preview we load script.json via XHR
+if (!window.__SCRIPT__) { const x = new XMLHttpRequest(); x.open('GET', 'script.json', false); x.send(); window.__SCRIPT__ = JSON.parse(x.responseText); }
+</script>
+<script src="core.js"></script>
+<script src="scenes/s1_intro.js"></script>
+<script src="scenes/s2_arch.js"></script>
+<script src="scenes/s3_media.js"></script>
+<script src="scenes/s4_script.js"></script>
+<script src="scenes/s5_render.js"></script>
+<script src="scenes/s6_deps.js"></script>
+<script src="scenes/s7_refine.js"></script>
+<script src="scenes/s8_outro.js"></script>
+<script>
+const ctx = document.getElementById('c').getContext('2d');
+window.draw = f => renderFrame(ctx, f);
+window.ready = document.fonts.load('40px "WenQuanYi Zen Hei"').then(() => document.fonts.load('40px "Noto Color Emoji"')).then(() => true);
+// manual preview: index.html?f=300  or  ?play
+const q = new URLSearchParams(location.search);
+window.ready.then(() => {
+  if (q.has('play')) { const t0 = performance.now(); const loop = () => { draw(Math.floor((performance.now() - t0) / 1000 * FPS) % (SCRIPT.duration * FPS)); requestAnimationFrame(loop); }; loop(); }
+  else draw(+(q.get('f') || 0));
+});
+</script>
+</body></html>
