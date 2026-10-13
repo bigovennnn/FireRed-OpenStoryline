@@ -2,7 +2,7 @@
 // Renders PNG frames with headless Chromium. Each frame is a pure function of its index,
 // so workers can render interleaved slices in any order.
 const { chromium } = require('playwright');
-const fs = require('fs'), path = require('path');
+const fs = require('fs'), path = require('path'), { pathToFileURL } = require('url');
 const script = JSON.parse(fs.readFileSync(path.join(__dirname, 'script.json'), 'utf8'));
 const args = process.argv.slice(2);
 const outDir = args[0] || 'frames';
@@ -20,7 +20,7 @@ fs.mkdirSync(outDir, { recursive: true });
     const page = await browser.newPage({ viewport: { width: 1920, height: 1080 } });
     page.on('pageerror', e => { console.error('PAGE ERROR', e.message); process.exitCode = 1; });
     await page.addInitScript(s => { window.__SCRIPT__ = s; }, script);
-    await page.goto('file://' + path.join(__dirname, 'index.html'));
+    await page.goto(pathToFileURL(path.join(__dirname, 'index.html')).href); // valid file:// URL on Windows too
     await page.evaluate(() => window.ready);
     for (let i = w; i < frames.length; i += workers) {
       const f = frames[i];

@@ -4,8 +4,9 @@
 
 const W = 1920, H = 1080, FPS = 30;
 const STAGE_H = 860;          // scenes keep key content above this line
-const FONT = '"WenQuanYi Zen Hei", "Noto Color Emoji", sans-serif';
-const MONO = '"DejaVu Sans Mono", "WenQuanYi Zen Hei Mono", monospace';
+// font stacks cover Linux (WenQuanYi/Noto/DejaVu), Windows (YaHei/Segoe/Consolas) and macOS (PingFang/Apple Emoji/Menlo)
+const FONT = '"WenQuanYi Zen Hei", "Microsoft YaHei", "PingFang SC", "Noto Color Emoji", "Segoe UI Emoji", "Apple Color Emoji", sans-serif';
+const MONO = '"DejaVu Sans Mono", Consolas, Menlo, "WenQuanYi Zen Hei Mono", "Microsoft YaHei", monospace';
 
 const C = {
   cream: '#FBF6EC', paper: '#FFFDF8', ink: '#3D3929', inkSoft: '#7A7160',

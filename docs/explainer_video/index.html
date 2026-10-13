@@ -19,7 +19,9 @@ if (!window.__SCRIPT__) { const x = new XMLHttpRequest(); x.open('GET', 'script.
 <script>
 const ctx = document.getElementById('c').getContext('2d');
 window.draw = f => renderFrame(ctx, f);
-window.ready = document.fonts.load('40px "WenQuanYi Zen Hei"').then(() => document.fonts.load('40px "Noto Color Emoji"')).then(() => true);
+// warm up whichever CJK / emoji fonts this OS has (missing ones resolve harmlessly)
+window.ready = Promise.all(['WenQuanYi Zen Hei', 'Microsoft YaHei', 'PingFang SC', 'Noto Color Emoji', 'Segoe UI Emoji']
+  .map(f => document.fonts.load(`40px "${f}"`, '中✨'))).then(() => true);
 // manual preview: index.html?f=300  or  ?play
 const q = new URLSearchParams(location.search);
 window.ready.then(() => {
